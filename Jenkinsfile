@@ -7,7 +7,7 @@ node {
         sh "docker stop mongodb"
         sh "docker rm mongodb"
         sh "docker network rm test"
-        sh "docker network create -t bridge test"
+        sh "docker network create -d bridge test"
         sh "docker run -itd -p 27017:27017 --network test --name mongodb mongo:latest"
     }
     
