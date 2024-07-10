@@ -4,16 +4,18 @@ node {
     }
     
     stage("Docker Mongo") {
-        // sh "docker stop mongodb"
-        // sh "docker rm mongodb"
-        sh "docker run -itd -p 27017:27017 --name mongodb mongo:latest"
+        sh "docker stop mongodb"
+        sh "docker rm mongodb"
+        sh "docker network rm test"
+        sh "docker network create -t bridge test"
+        sh "docker run -itd -p 27017:27017 --network test --name mongodb mongo:latest"
     }
     
     stage("Docker Deployment") {
-        // sh "docker stop deploy"
-        // sh "docker rm deploy"
-        // sh "docker rmi project"
+        sh "docker stop deploy"
+        sh "docker rm deploy"
+        sh "docker rmi project"
         sh "docker build -t project ."
-        sh "docker run -itd -p 3000:3000 --name deploy project"
+        sh "docker run -itd -p 3000:3000 --network test --name deploy project"
     }
 }
