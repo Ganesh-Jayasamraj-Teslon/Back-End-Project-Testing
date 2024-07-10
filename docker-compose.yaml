@@ -12,5 +12,5 @@ services:
     depends_on:
       - mongodb
     environment:
-      PORT=3000
-      MONGODB_URL=mongodb://mongodb:27017/Users
+      - PORT=3000
+      - MONGODB_URL=mongodb://mongodb:27017/Users
