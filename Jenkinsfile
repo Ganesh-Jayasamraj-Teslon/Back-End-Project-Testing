@@ -2,20 +2,8 @@ node {
     stage("SCM Checkout") {
         git branch: 'main', url: 'https://github.com/Ganesh-Jayasamraj-Teslon/Back-End-Project-Testing.git'
     }
-    
-    stage("Docker Mongo") {
-        sh "docker stop mongodb"
-        sh "docker rm mongodb"
-        sh "docker network rm test"
-        sh "docker network create -d bridge test"
-        sh "docker run -itd -p 27017:27017 --network test --name mongodb mongo:latest"
-    }
-    
-    stage("Docker Deployment") {
-        sh "docker stop deploy"
-        sh "docker rm deploy"
-        sh "docker rmi project"
-        sh "docker build -t project ."
-        sh "docker run -itd -p 3000:3000 --network test --name deploy project"
+
+    stage("Docker build and run using compose") {
+        sh "docker compose up -d"
     }
 }

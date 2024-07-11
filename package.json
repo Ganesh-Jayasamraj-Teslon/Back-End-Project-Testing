@@ -5,7 +5,7 @@
   "main": "src/server.ts",
   "scripts": {
     "dev": "nodemon",
-    "start": "npx ts-node ./src/server.ts"
+    "start": "ts-node ./src/server.ts"
   },
   "keywords": [
     "Mongoose",
